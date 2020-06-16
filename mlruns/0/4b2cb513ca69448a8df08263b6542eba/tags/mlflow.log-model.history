@@ -1,0 +1,1 @@
+[{"run_id": "4b2cb513ca69448a8df08263b6542eba", "artifact_path": "RF Regression", "utc_time_created": "2020-06-16 15:30:47.389543", "flavors": {"python_function": {"loader_module": "mlflow.sklearn", "python_version": "3.7.7", "data": "model.pkl", "env": "conda.yaml"}, "sklearn": {"pickled_model": "model.pkl", "sklearn_version": "0.22.1", "serialization_format": "cloudpickle"}}}]

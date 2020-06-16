@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/9af67cafa9a042c1b28ef1d84437ac2c/artifacts
+end_time: 1592288854699
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 9af67cafa9a042c1b28ef1d84437ac2c
+run_uuid: 9af67cafa9a042c1b28ef1d84437ac2c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1592288854364
+status: 3
+tags: []
+user_id: manas

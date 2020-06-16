@@ -5,6 +5,7 @@ from test import return_test_sample
 from multi_train import train_fcn
 import os 
 import logging as logger
+import boto3
 # from gevent.pywsgi import WSGIServer
 logger.basicConfig(level='DEBUG')
 
@@ -12,27 +13,34 @@ logger.basicConfig(level='DEBUG')
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-# Loading the best model after running the multi_train
-files = os.listdir('./mlruns/0/')
-r2_values = []
-file_names = []
-for dir_id in files:
-    if dir_id != 'meta.yaml':
-        file_names.append(dir_id)
-        path = './mlruns/0/'+f'{dir_id}'+'/metrics/r2'
-        fp = open(path)
-        data = fp.read()
-        r2_values.append(round(float(data.split(' ')[1]), 5))
+# Loading the model from s3 bucket
+s3 = boto3.client('s3') #low-level functional API
+response = s3.get_object(Bucket='mlflow.model1', Key='BestModel/model.pkl')
+body = response['Body'].read()
+model = pickle.loads(body)
+
+# LOCAL ACCESS
+# # Loading the best model after running the multi_train
+# files = os.listdir('./mlruns/0/')
+# r2_values = []
+# file_names = []
+# for dir_id in files:
+#     if dir_id != 'meta.yaml':
+#         file_names.append(dir_id)
+#         path = './mlruns/0/'+f'{dir_id}'+'/metrics/r2'
+#         fp = open(path)
+#         data = fp.read()
+#         r2_values.append(round(float(data.split(' ')[1]), 5))
         
-# Getting the best model
-idx = np.argmax(r2_values)
-# print(r2_values)
-# print(idx)
-# print(file_names)
-model_dir = os.listdir('./mlruns/0/'+file_names[idx]+'/artifacts/')
-model_path = './mlruns/0/'+file_names[idx]+'/artifacts/'+model_dir[1]+'/model.pkl'
-# print(model_path)
-model = pickle.load(open(model_path, 'rb'))
+# # Getting the best model
+# idx = np.argmax(r2_values)
+# # print(r2_values)
+# # print(idx)
+# # print(file_names)
+# model_dir = os.listdir('./mlruns/0/'+file_names[idx]+'/artifacts/')
+# model_path = './mlruns/0/'+file_names[idx]+'/artifacts/'+model_dir[1]+'/model.pkl'
+# # print(model_path)
+# model = pickle.load(open(model_path, 'rb'))
 
 # Getting the test data samples
 X_test, test_data = return_test_sample()
@@ -48,7 +56,7 @@ def home():
         value = list(k)
         test_list.append({f"Sample": i, f"values": value})
 
-    return render_template('index.html', test_list = test_list, best_model=model_dir[1])
+    return render_template('index.html', test_list = test_list, best_model='Model is taken from S3 bucket')
 
 @app.route('/predict/<idx>')
 def predict(idx):
@@ -69,7 +77,7 @@ def predict(idx):
         test_list.append({f"Sample": i, f"values": value})
 
     return render_template('results.html',  test_data = X_test[int(idx)], test_list = test_list,
-                            prediction_text=f'Predicted House price : $ {output}', best_model=model_dir[1])
+                            prediction_text=f'Predicted House price : $ {output}', best_model='Model is taken from S3 bucket')
 
 @app.route('/retrain', methods=['POST', 'GET'])
 def retrain():
@@ -122,7 +130,7 @@ def retrain():
     # text=f'The R_sqaure value after training is {r2}'
 
 
-    return render_template('retrain.html', text=f'The R_sqaure value after training is {r2}', best_model=model_dir[1])
+    return render_template('retrain.html', text=f'The R_sqaure value after training is {r2}', best_model='Model is taken from S3 bucket')
 
 
 # if __name__ == "__main__":

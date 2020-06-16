@@ -6,11 +6,13 @@ attrs==19.3.0
 backcall==0.1.0
 bleach==3.1.4
 brotlipy==0.7.0
-certifi==2020.4.5.2
+certifi==2020.4.5.1
 cffi==1.14.0
 chardet==3.0.4
 click==7.1.2
 cloudpickle==1.4.1
+conda==4.8.3
+conda-package-handling==1.7.0
 configparser==5.0.0
 cryptography==2.9.2
 cycler==0.10.0
@@ -85,6 +87,7 @@ requests==2.23.0
 ruamel-yaml==0.15.87
 scikit-learn==0.22.1
 scipy==1.4.1
+seaborn==0.10.1
 Send2Trash==1.5.0
 simplejson==3.17.0
 six==1.15.0

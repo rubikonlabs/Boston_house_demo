@@ -1,0 +1,1 @@
+[{"run_id": "9af67cafa9a042c1b28ef1d84437ac2c", "artifact_path": "SGD Regression", "utc_time_created": "2020-06-16 06:27:34.677571", "flavors": {"python_function": {"loader_module": "mlflow.sklearn", "python_version": "3.7.7", "data": "model.pkl", "env": "conda.yaml"}, "sklearn": {"pickled_model": "model.pkl", "sklearn_version": "0.22.1", "serialization_format": "cloudpickle"}}}]

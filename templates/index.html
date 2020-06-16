@@ -40,24 +40,22 @@
     </article>
     <article class='media content-section'>
       <div class="media-body">
-        <h6>Samples Description</h6>
-        <p>From the dataset 50 recordes were randomly sampled and were used for prediction using best model</p>
+        <h6>Request Description</h6>
+        <p>From the dataset 50 records were randomly sampled and were used for prediction using best model</p>
       </div>
     </article>
-    <article class='media content-section'>
-      <div class="alert alert-info">
-        <h6>Current Best model : {{best_model}}</h6>
-      </div>
-    </article>
+    <div class="alert alert-info">
+      Current Best model : {{best_model}}
+    </div>
   </div>
   <div class="col-md-6">
     <article class="media content-section">
       <div class="media-body">
-        <h5>Test the samples <br>-----------------------</h5>
+        <h5>Make Request <br>-------------------</h5>
       {% for test in test_list %}
         <article class="media content-section">
           <div class="media-body">
-            <h6><a href="{{ url_for('predict', idx = test.Sample) }}">Sample : {{ test.Sample }}</h6>
+            <h6><a href="{{ url_for('predict', idx = test.Sample) }}">Request : {{ test.Sample }}</h6>
           </div>
         </article>
       {% endfor %}
