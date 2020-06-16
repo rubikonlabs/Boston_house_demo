@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-5">
+    <article class="media content-section">
+      <div class="media-body">
+        <h5>Predicted price <br>-----------------------</h5>
+          <article class="media">
+            <div class="media-body">
+              Data : <br> 
+              CRIM={{ test_data[0] }}, ZN={{ test_data[1] }}, INDUS={{ test_data[2] }}, CHAS={{ test_data[3] }},
+              NOX={{ test_data[4] }}, RM={{ test_data[5] }}, AGE={{ test_data[6] }}, DIS={{ test_data[7] }},
+              RAD={{ test_data[8] }}, TAX={{ test_data[9] }}, PTRATIO={{ test_data[10] }}, B={{ test_data[11] }},
+              LSTAT={{ test_data[12] }}
+              <br>
+              {{ prediction_text }}
+            </div>
+          </article>
+      </div>
+    </article>
+    <article class='media content-section'>
+      <div class="media-body">
+        <h6>Samples Description</h6>
+        <p>From the dataset 50 recordes were randomly sampled and were used for prediction using best model</p>
+      </div>
+    </article>
+    <article class='media content-section'>
+      <div class="alert alert-info">
+        <h6>Current Best model : {{best_model}}</h6>
+      </div>
+    </article>
+  </div>
+  <div class="col-md-7">
+    <article class="media content-section">
+      <div class="media-body">
+        <h5>Test the samples <br>-----------------------</h5>
+      {% for test in test_list %}
+        <article class="media content-section">
+          <div class="media-body">
+            <h6><a href="{{ url_for('predict', idx = test.Sample) }}">Sample : {{ test.Sample }}</h6>
+          </div>
+        </article>
+      {% endfor %}
+      </div>
+    </article>
+  </div>
+</div>
+    
+{% endblock content %}
