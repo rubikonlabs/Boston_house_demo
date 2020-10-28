@@ -14,7 +14,7 @@ cloudpickle==1.4.1
 conda==4.8.3
 conda-package-handling==1.7.0
 configparser==5.0.0
-cryptography==2.9.2
+cryptography==3.2
 cycler==0.10.0
 databricks-cli==0.9.1
 decorator==4.4.2
